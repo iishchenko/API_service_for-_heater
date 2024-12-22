@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from rest_framework.viewsets import ModelViewSet
 from .models import Actor, Genre, Play, TheatreHall, Performance, Reservation, Ticket
 from .serializers import (
@@ -44,3 +45,8 @@ class ReservationViewSet(ModelViewSet):
 class TicketViewSet(ModelViewSet):
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
+=======
+from django.shortcuts import render
+
+# Create your views here.
+>>>>>>> 2e9e3efca02944a3cc8639d06feb439a3caa10e5

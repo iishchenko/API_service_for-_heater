@@ -1,4 +1,5 @@
 from django.db import models
+<<<<<<< HEAD
 from django.contrib.auth.models import User
 
 
@@ -61,3 +62,7 @@ class Ticket(models.Model):
 
     def __str__(self):
         return f"Row {self.row}, Seat {self.seat}"
+=======
+
+# Create your models here.
+>>>>>>> 2e9e3efca02944a3cc8639d06feb439a3caa10e5
