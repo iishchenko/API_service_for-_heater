@@ -1,7 +1,6 @@
-# API_service_for_theater
-# Theatre API Project
+# API_service_for_theater #
 
-The **Theatre API** is a Django REST Framework-based application for managing theatre-related data, including actors, genres, plays, theatre halls, performances, reservations, and tickets. This API supports CRUD operations for all models and is fully integrated with PostgreSQL.
+The **API_service_for_theater** is a Django REST Framework-based application for managing theatre-related data, including actors, genres, plays, theatre halls, performances, reservations, and tickets. This API supports CRUD operations for all models and is fully integrated with PostgreSQL.
 
 ---
 
