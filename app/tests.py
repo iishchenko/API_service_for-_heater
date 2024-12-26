@@ -36,6 +36,7 @@ class TheatreHallModelTest(TestCase):
     def test_theatre_hall_creation(self):
         hall = TheatreHall.objects.create(name="Main Hall", rows=10, seats_in_row=20)
         self.assertEqual(str(hall), "Main Hall")
+        
 
 class ActorAPITest(TestCase):
     def setUp(self):
@@ -70,6 +71,7 @@ class PlayAPITest(TestCase):
         response = self.client.post("/api/plays/", self.play_data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data["title"], "Hamlet")
+
 
 class PerformanceAPITest(TestCase):
     def setUp(self):

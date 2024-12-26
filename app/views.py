@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
-from .models import Actor, Genre, Play, TheatreHall, Performance, Reservation, Ticket
-from .serializers import (
+from app.models import Actor, Genre, Play, TheatreHall, Performance, Reservation, Ticket
+from app.serializers import (
     ActorSerializer,
     GenreSerializer,
     PlaySerializer,
