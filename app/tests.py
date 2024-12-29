@@ -1,9 +1,23 @@
+import self
 from django.test import TestCase
 from django.contrib.auth.models import User
 from rest_framework.test import APIClient
 from rest_framework import status
 from app.models import Actor, Genre, Play, TheatreHall, Performance, Reservation, Ticket
 from datetime import datetime
+from django.utils.timezone import now
+from django.conf import settings
+from rest_framework.authtoken.models import Token
+
+settings.USE_TZ = False
+
+
+Performance.objects.create(show_time=now())
+
+user = User.objects.create_user(username='testuser', password='testpass')
+token = Token.objects.create(user=user)
+self.client.credentials(HTTP_AUTHORIZATION=f'Token {token.key}')
+
 
 
 class ActorModelTest(TestCase):

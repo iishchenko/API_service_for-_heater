@@ -114,3 +114,9 @@ The **API_service_for_theater** is a Django REST Framework-based application for
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
+
+## Typical commands
+
+ docker-compose up --build
+ docker-compose up test  --build
+ docker-compose down
