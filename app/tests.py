@@ -35,7 +35,7 @@ class PlayModelTest(TestCase):
 
 class TheatreHallModelTest(TestCase):
     def test_theatre_hall_creation(self):
-        hall = TheatreHall.objects.create(name="Main Hall", rows=10, seats_in_row=20, capacity=200)
+        hall = TheatreHall.objects.create(name="Main Hall", rows=10, seats_in_row=20)
         self.assertEqual(str(hall), "Main Hall")
 
 
