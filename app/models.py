@@ -7,7 +7,7 @@ class Actor(models.Model):
     last_name = models.CharField(max_length=255, null=False, blank=False, default="")
 
     def __str__(self):
-        return (self.first_name or "") + " " + (self.last_name or "")
+        return f"{self.first_name or ''} {self.last_name or ''}"
 
 
 class Genre(models.Model):
