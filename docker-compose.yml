@@ -29,7 +29,7 @@ services:
 
   test:
     build: .
-    command: sh -c "python manage.py test"
+    command: sh -c "python manage.py migrate && python manage.py test app"
     volumes:
       - .:/app
     depends_on:
@@ -38,7 +38,7 @@ services:
     env_file:
       - .env
     ports:
-      - "5433:5433"
+      - "5433:5432"
 
 volumes:
   postgres_data:

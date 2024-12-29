@@ -1,22 +1,10 @@
-import self
 from django.test import TestCase
 from django.contrib.auth.models import User
 from rest_framework.test import APIClient
 from rest_framework import status
 from app.models import Actor, Genre, Play, TheatreHall, Performance, Reservation, Ticket
-from datetime import datetime
-from django.utils.timezone import now
-from django.conf import settings
 from rest_framework.authtoken.models import Token
-from app.models import Play, Performance
 from django.utils.timezone import now
-
-play = Play.objects.create(name="Sample Play")
-Performance.objects.create(show_time=now(), play=play)
-
-user = User.objects.create_user(username='testuser', password='testpass')
-token = Token.objects.create(user=user)
-self.client.credentials(HTTP_AUTHORIZATION=f'Token {token.key}')
 
 
 class ActorModelTest(TestCase):
@@ -47,14 +35,17 @@ class PlayModelTest(TestCase):
 
 class TheatreHallModelTest(TestCase):
     def test_theatre_hall_creation(self):
-        hall = TheatreHall.objects.create(name="Main Hall", rows=10, seats_in_row=20)
+        hall = TheatreHall.objects.create(name="Main Hall", rows=10, seats_in_row=20, capacity=200)
         self.assertEqual(str(hall), "Main Hall")
-        
+
 
 class ActorAPITest(TestCase):
     def setUp(self):
         self.client = APIClient()
         self.actor_data = {"first_name": "John", "last_name": "Doe"}
+        user = User.objects.create_user(username='testuser', password='testpass')
+        token = Token.objects.create(user=user)
+        self.client.credentials(HTTP_AUTHORIZATION=f'Token {token.key}')
 
     def test_create_actor(self):
         response = self.client.post("/api/actors/", self.actor_data)
@@ -79,6 +70,9 @@ class PlayAPITest(TestCase):
             "actors": [self.actor.id],
             "genres": [self.genre.id],
         }
+        user = User.objects.create_user(username='testuser', password='testpass')
+        token = Token.objects.create(user=user)
+        self.client.credentials(HTTP_AUTHORIZATION=f'Token {token.key}')
 
     def test_create_play(self):
         response = self.client.post("/api/plays/", self.play_data)
@@ -94,8 +88,11 @@ class PerformanceAPITest(TestCase):
         self.performance_data = {
             "play": self.play.id,
             "theatre_hall": self.hall.id,
-            "show_time": datetime.now(),
+            "show_time": now(),
         }
+        user = User.objects.create_user(username='testuser', password='testpass')
+        token = Token.objects.create(user=user)
+        self.client.credentials(HTTP_AUTHORIZATION=f'Token {token.key}')
 
     def test_create_performance(self):
         response = self.client.post("/api/performances/", self.performance_data)
@@ -110,7 +107,7 @@ class TicketAPITest(TestCase):
         self.play = Play.objects.create(title="Test Play", description="A play")
         self.hall = TheatreHall.objects.create(name="Main Hall", rows=10, seats_in_row=20)
         self.performance = Performance.objects.create(
-            play=self.play, theatre_hall=self.hall, show_time=datetime.now()
+            play=self.play, theatre_hall=self.hall, show_time=now()
         )
         self.reservation = Reservation.objects.create(user=self.user)
         self.ticket_data = {
@@ -119,6 +116,8 @@ class TicketAPITest(TestCase):
             "performance": self.performance.id,
             "reservation": self.reservation.id,
         }
+        token = Token.objects.create(user=self.user)
+        self.client.credentials(HTTP_AUTHORIZATION=f'Token {token.key}')
 
     def test_create_ticket(self):
         response = self.client.post("/api/tickets/", self.ticket_data)
