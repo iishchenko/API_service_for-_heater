@@ -8,16 +8,15 @@ from datetime import datetime
 from django.utils.timezone import now
 from django.conf import settings
 from rest_framework.authtoken.models import Token
+from app.models import Play, Performance
+from django.utils.timezone import now
 
-settings.USE_TZ = False
-
-
-Performance.objects.create(show_time=now())
+play = Play.objects.create(name="Sample Play")
+Performance.objects.create(show_time=now(), play=play)
 
 user = User.objects.create_user(username='testuser', password='testpass')
 token = Token.objects.create(user=user)
 self.client.credentials(HTTP_AUTHORIZATION=f'Token {token.key}')
-
 
 
 class ActorModelTest(TestCase):
